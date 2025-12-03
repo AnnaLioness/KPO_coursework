@@ -43,10 +43,10 @@ namespace DocumetForms
             // Авторизация успешна
             MessageBox.Show("Добро пожаловать!");
             var documentService = Program.ServiceProvider!.GetRequiredService<DocumentService>();
-            
 
+            
             var panel = new FormAdmin(admin, documentService, _adminService);
-            panel.Show();
+            panel.ShowDialog();
             this.Hide();
         }
     }

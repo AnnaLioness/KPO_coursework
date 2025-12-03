@@ -54,6 +54,7 @@
             dataGridViewDocs.RowHeadersWidth = 51;
             dataGridViewDocs.Size = new Size(666, 549);
             dataGridViewDocs.TabIndex = 0;
+            dataGridViewDocs.SelectionChanged += dataGridViewDocs_SelectionChanged;
             // 
             // textBoxTitle
             // 
@@ -201,6 +202,7 @@
             Controls.Add(dataGridViewDocs);
             Name = "FormAdmin";
             Text = "FormAdmin";
+            Load += FormAdmin_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridViewDocs).EndInit();
             ResumeLayout(false);
             PerformLayout();

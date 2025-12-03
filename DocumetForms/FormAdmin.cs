@@ -1,4 +1,6 @@
-﻿using DocumetForms.Helpers;
+﻿using DocumentFormat.OpenXml.Bibliography;
+using DocumentFormat.OpenXml.Wordprocessing;
+using DocumetForms.Helpers;
 using Microsoft.Extensions.DependencyInjection;
 using Models.Models;
 using Services.Services;
@@ -27,7 +29,6 @@ namespace DocumetForms
             _documentService = docService;
             _adminService = adminService;
             _currentAdmin = admin;
-            LoadDocumentsAsync();
         }
 
         private void buttonLoad_Click(object sender, EventArgs e)
@@ -168,7 +169,48 @@ namespace DocumetForms
         {
             var docs = await _documentService.GetDocumentsByAdminAsync(_currentAdmin.Id);
             dataGridViewDocs.DataSource = docs.ToList();
+            ClearInputs();
+        }
+        private void ClearInputs()
+        {
+            textBoxTitle.Clear();
+            textBoxAuthor.Clear();
+            textBoxYear.Clear();
+            textBoxLink.Clear();
         }
 
+        private async void dataGridViewDocs_SelectionChanged(object sender, EventArgs e)
+        {
+            // Проверяем, есть ли выбранная строка
+            if (dataGridViewDocs.CurrentRow == null) return;
+
+            int index = dataGridViewDocs.CurrentRow.Index;
+
+            // Проверяем, что индекс не выходит за границы строк DataGridView
+            if (index < 0 || index >= dataGridViewDocs.Rows.Count) return;
+
+            // Безопасно получаем Id документа из выбранной строки
+            if (!int.TryParse(dataGridViewDocs.CurrentRow.Cells["Id"].Value?.ToString(), out int id))
+                return;
+
+            // Получаем документ по Id
+            var doc = await _documentService.GetByIdAsync(id);
+            if (doc == null)
+            {
+                MessageBox.Show("Документ не найден.");
+                return;
+            }
+
+            // Заполняем текстбоксы данными документа
+            textBoxTitle.Text = doc.Title;
+            textBoxAuthor.Text = doc.Author;
+            textBoxYear.Text = doc.Year.ToString();
+            textBoxLink.Text = doc.CloudLink;
+        }
+
+        private void FormAdmin_Load(object sender, EventArgs e)
+        {
+            LoadDocumentsAsync();
+        }
     }
 }
