@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35208.52
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{5926ABC9-2356-44F7-90B5-7D0A26CFC357}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{5926ABC9-2356-44F7-90B5-7D0A26CFC357}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositories\Repositories.csproj", "{DEA534DA-C1AD-42FE-BD55-38F8BEFF2218}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repositories\Repositories.csproj", "{DEA534DA-C1AD-42FE-BD55-38F8BEFF2218}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{FEF2DFCD-7B96-4F8D-860E-9065B1D61C37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{FEF2DFCD-7B96-4F8D-860E-9065B1D61C37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumetForms", "DocumetForms\DocumetForms.csproj", "{F070DC11-D64C-40F6-A448-9ACE5266BFE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocumetForms", "DocumetForms\DocumetForms.csproj", "{F070DC11-D64C-40F6-A448-9ACE5266BFE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{164BCD6D-364F-477D-B5C8-A8E53B9AF8FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{F070DC11-D64C-40F6-A448-9ACE5266BFE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F070DC11-D64C-40F6-A448-9ACE5266BFE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F070DC11-D64C-40F6-A448-9ACE5266BFE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{164BCD6D-364F-477D-B5C8-A8E53B9AF8FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{164BCD6D-364F-477D-B5C8-A8E53B9AF8FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{164BCD6D-364F-477D-B5C8-A8E53B9AF8FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{164BCD6D-364F-477D-B5C8-A8E53B9AF8FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
