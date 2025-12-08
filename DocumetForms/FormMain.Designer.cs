@@ -32,6 +32,8 @@
             textBoxSearch = new TextBox();
             buttonAuth = new Button();
             buttonRegister = new Button();
+            buttonSearch = new Button();
+            buttonCancel = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -53,7 +55,7 @@
             // 
             // buttonAuth
             // 
-            buttonAuth.Location = new Point(804, 33);
+            buttonAuth.Location = new Point(845, 33);
             buttonAuth.Name = "buttonAuth";
             buttonAuth.Size = new Size(109, 29);
             buttonAuth.TabIndex = 2;
@@ -63,7 +65,7 @@
             // 
             // buttonRegister
             // 
-            buttonRegister.Location = new Point(933, 33);
+            buttonRegister.Location = new Point(960, 33);
             buttonRegister.Name = "buttonRegister";
             buttonRegister.Size = new Size(106, 29);
             buttonRegister.TabIndex = 3;
@@ -71,11 +73,33 @@
             buttonRegister.UseVisualStyleBackColor = true;
             buttonRegister.Click += buttonRegister_Click;
             // 
+            // buttonSearch
+            // 
+            buttonSearch.Location = new Point(588, 33);
+            buttonSearch.Name = "buttonSearch";
+            buttonSearch.Size = new Size(94, 29);
+            buttonSearch.TabIndex = 4;
+            buttonSearch.Text = "Поиск";
+            buttonSearch.UseVisualStyleBackColor = true;
+            buttonSearch.Click += buttonSearch_Click;
+            // 
+            // buttonCancel
+            // 
+            buttonCancel.Location = new Point(688, 33);
+            buttonCancel.Name = "buttonCancel";
+            buttonCancel.Size = new Size(94, 29);
+            buttonCancel.TabIndex = 5;
+            buttonCancel.Text = "Отмена";
+            buttonCancel.UseVisualStyleBackColor = true;
+            buttonCancel.Click += buttonCancel_Click;
+            // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1078, 569);
+            Controls.Add(buttonCancel);
+            Controls.Add(buttonSearch);
             Controls.Add(buttonRegister);
             Controls.Add(buttonAuth);
             Controls.Add(textBoxSearch);
@@ -94,5 +118,7 @@
         private TextBox textBoxSearch;
         private Button buttonAuth;
         private Button buttonRegister;
+        private Button buttonSearch;
+        private Button buttonCancel;
     }
 }

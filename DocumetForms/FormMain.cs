@@ -44,5 +44,18 @@ namespace DocumetForms
             var docs = await _documentService.GetAllAsync();
             dataGridView.DataSource = docs.ToList();
         }
+
+        private async void buttonSearch_Click(object sender, EventArgs e)
+        {
+            var query = textBoxSearch.Text.Trim();
+            var results = await _documentService.SearchAsync(query);
+            dataGridView.DataSource = results;
+        }
+
+        private async void buttonCancel_Click(object sender, EventArgs e)
+        {
+            textBoxSearch.Text = "";
+            await LoadDocumentsAsync();
+        }
     }
 }

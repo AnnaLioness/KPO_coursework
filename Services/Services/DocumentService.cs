@@ -1,6 +1,8 @@
-﻿using Models.Models;
+﻿using Models.DTOs;
+using Models.Models;
 using Repositories.Implementations;
 using Repositories.Interfaces;
+using Services.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,6 +57,41 @@ namespace Services.Services
         {
             var all = await _repository.GetAllAsync();
             return all.Where(d => d.AdminId == adminId);
+        }
+        public async Task<List<DocumentDTO>> SearchAsync(string query)
+        {
+            var allDocs = await _repository.GetAllAsync();
+
+            var dtos = allDocs.Select(d => new DocumentDTO
+            {
+                Id = d.Id,
+                AdminId = d.AdminId,
+                Title = d.Title,
+                Author = d.Author,
+                Year = d.Year,
+                CloudLink = d.CloudLink,
+                ContentForSearch = d.Content,
+                HighlightedContent = ""
+            }).ToList();
+
+            if (string.IsNullOrWhiteSpace(query)) return dtos;
+
+            var queryLemmas = MorphologyHelper.GetLemmas(query).ToHashSet();
+
+            foreach (var dto in dtos)
+            {
+                var docLemmas = MorphologyHelper.GetLemmas(dto.ContentForSearch);
+                if (docLemmas.Any(l => queryLemmas.Contains(l)))
+                {
+                    dto.HighlightedContent = MorphologyHelper.HighlightText(dto.ContentForSearch, query);
+                }
+                else
+                {
+                    dto.HighlightedContent = "";
+                }
+            }
+
+            return dtos.Where(d => !string.IsNullOrEmpty(d.HighlightedContent)).ToList();
         }
     }
 }
