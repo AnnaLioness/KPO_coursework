@@ -20,6 +20,19 @@ namespace DocumetForms
         {
             InitializeComponent();
             _documentService = documentService;
+            var linkColumn = new DataGridViewLinkColumn
+            {
+                HeaderText = "Ссылка",
+                DataPropertyName = "CloudLink",
+                Name = "CloudLink",
+                TrackVisitedState = true,
+                UseColumnTextForLinkValue = false
+            };
+            if (!dataGridView.Columns.Contains("CloudLink"))
+                dataGridView.Columns.Add(linkColumn);
+
+            // Подписываемся на событие клика по ссылке
+            dataGridView.CellContentClick += dataGridView_CellContentClick;
             LoadDocumentsAsync();
         }
 
@@ -43,6 +56,39 @@ namespace DocumetForms
         {
             var docs = await _documentService.GetAllAsync();
             dataGridView.DataSource = docs.ToList();
+        }
+
+        private async void buttonSearch_Click(object sender, EventArgs e)
+        {
+            var query = textBoxSearch.Text.Trim();
+            var results = await _documentService.SearchAsync(query);
+            dataGridView.DataSource = results;
+        }
+
+        private async void buttonCancel_Click(object sender, EventArgs e)
+        {
+            textBoxSearch.Text = "";
+            await LoadDocumentsAsync();
+        }
+        private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && dataGridView.Columns[e.ColumnIndex].Name == "CloudLink")
+            {
+                var link = dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString();
+                if (!string.IsNullOrEmpty(link))
+                {
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                    {
+                        FileName = link,
+                        UseShellExecute = true
+                    });
+                }
+            }
+        }
+
+        private async void buttonRef_Click(object sender, EventArgs e)
+        {
+            await LoadDocumentsAsync();
         }
     }
 }
